@@ -38,7 +38,8 @@ func (t *tokenSource) Token() (*oauth2.Token, error) {
 func netrcPath() string {
 	filename := filepath.Join(os.Getenv("HOME"), ".netrc")
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		panic(fmt.Sprintf("no such file or directory: %s", filename))
+		fmt.Println("A .netrc file is required to run", os.Args[0])
+		os.Exit(1)
 	}
 	return filename
 }
